@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import "./login.style.scss";
 import { Link } from "react-router-dom";
-import InputField from "../../components/common/Input";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/user";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "../../redux/store";
+import { doLogin } from "../../redux/slices/user";
 
 function Login() {
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const userData = { email, password }; //
-    const data = await login(userData);
-    await localStorage.setItem("token", data);
+    const userData = { email, password };
+    dispatch(doLogin(userData));
+
     navigate("/getProduct", { replace: true });
   };
+
+  const loading = useAppSelector((state) => state.userData.loading);
 
   return (
     <div className="container">
@@ -36,7 +41,9 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          Login
+        </button>
       </form>
 
       <Link to="/">Goto SignUp</Link>

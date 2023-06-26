@@ -1,4 +1,4 @@
-import userReducer from "./slice/user";
+import userReducer from "./slices/user";
 
 export const reducer = {
   userData: userReducer,

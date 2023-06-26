@@ -73,7 +73,7 @@ export const login = async (
     const payload = { email: user.email, password: user.password, id: user.id };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-      expiresIn: 200000, //TODO change to 1 hour,
+      expiresIn: 200000,
     });
 
     return res.status(200).json({
