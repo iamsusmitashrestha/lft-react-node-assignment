@@ -5,7 +5,6 @@ export const addProduct = async (productData: any) => {
     const response = await post("/product/addProduct", { body: productData });
     return response.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

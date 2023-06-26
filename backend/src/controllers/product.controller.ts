@@ -7,7 +7,6 @@ export const addProduct = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.body);
     const { productName, available_qty, price } = req.body;
     let qty = Number(available_qty);
     let amount = Number(price);
@@ -16,9 +15,6 @@ export const addProduct = async (
     });
 
     let userId = owner?.id;
-    console.log(`userId:${userId}`);
-    console.log(req.body);
-    console.log(typeof available_qty);
 
     if (!userId) throw new Error("User not found");
 
@@ -30,8 +26,6 @@ export const addProduct = async (
         userId,
       },
     });
-
-    console.log(newProduct);
 
     return res.status(200).json({
       success: true,

@@ -15,7 +15,7 @@ function AddProduct() {
       await addProduct(productData);
       navigate("/getProduct", { replace: true });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
