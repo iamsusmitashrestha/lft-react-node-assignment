@@ -13,7 +13,7 @@ function AddProduct() {
       event.preventDefault();
       const productData = { productName, available_qty, price }; //
       await addProduct(productData);
-      navigate("/login");
+      navigate("/getProduct", { replace: true });
     } catch (error) {
       console.log(error);
     }
